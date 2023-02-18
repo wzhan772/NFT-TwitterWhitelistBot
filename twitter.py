@@ -2,6 +2,7 @@
 import tweepy
 import time
 #set up private keys for access
+#NOTE: your private key will be different
 auth = tweepy.OAuthHandler('naXcR0JCYwXC0S4J5XDwEDkwl','DSPwGhtjLX0zr1Zw0c0Xz0lvHubAyKfp7PVqKDT0Tu9lB0fxwZ')
 auth.set_access_token('2821980117-3uOTwpQ1u2FqOzFtjBRmTChS1rcdXIZnwXCXgTZ','Ao9WkRViF3my2ViOP3ooKtajddW6S9rPZwclC2Qo4m63H')
 api = tweepy.API(auth, wait_on_rate_limit=True)
@@ -22,16 +23,16 @@ for tweet in tweepy.Cursor(api.search_tweets, q = 'Tag 3 Friends NFT -filter:ret
         api.create_friendship(user_id=tweet.user.id)
         #get list of followers to tag in tweet
         for follower in tweepy.Cursor(api.get_followers).items():
-            if follower.screen_name == 'MildLootBoi':
+            if follower.screen_name == 'Account1':
                 #set global variables to access later on
                 global tag1
                 tag1 = follower.screen_name
                 tagList = tagList + ' @' + tag1 #+ ' '
-            elif follower.screen_name == 'BurdburdH':
+            elif follower.screen_name == 'Account2':
                 global tag2
                 tag2 = follower.screen_name
                 tagList = tagList + ' @' + tag2
-            elif follower.screen_name == 'wzhancrypbull':
+            elif follower.screen_name == 'Account3':
                 global tag3
                 tag3 = follower.screen_name
                 tagList = tagList + ' @' + tag3
@@ -43,10 +44,8 @@ for tweet in tweepy.Cursor(api.search_tweets, q = 'Tag 3 Friends NFT -filter:ret
         #empty the string
         tagList = ''
         #30 second break in between each round to prevent spam
-        time.sleep(60)
+        time.sleep(30)
     except tweepy.errors.TweepyException as e:
         print(e)
     except StopIteration:
         break
-
-#parse tweet for @ and then separate the rest   
